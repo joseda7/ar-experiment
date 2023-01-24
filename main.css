@@ -1,0 +1,24 @@
+.content{
+    position:fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+}
+.a-btn-pragma{
+    background-color: #c000ff;
+    font-family: "verdana";
+    font-size: 30px;
+    color: white;
+    padding: 6px;
+    position: relative;
+    bottom: 16px;
+    right: 11px;
+    outline: none;
+    text-decoration: none;
+    border-radius: 10px;
+    display: none;
+}
+
+.a-btn-pragma--active {
+    display: block;
+}

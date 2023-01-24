@@ -1,0 +1,98 @@
+<html>
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<!-- we import arjs version without NFT but with marker + location based support -->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+<link rel="stylesheet" href="main.css">
+<!-- https://deluxe-arithmetic-3be5f4.netlify.app -->
+<script>
+ 
+  const MARKERS = [
+    {
+      "id": "markerLogo",
+      "url": "./assets/pattern-Screenshot_8.patt",
+      "gltf-model": "./assets/lollipopB.glb"
+    },{
+      "id": "markerShip",
+      "url": "./assets/pattern-nave-1.patt",
+      "gltf-model": "./assets/lollipopA.glb"
+    } 
+  ]
+
+  let counter = 0; 
+
+  AFRAME.registerComponent('markerhandler', {
+    init: function () {    
+      this.el.sceneEl.addEventListener('markerFound', () => {
+        document.getElementById("btn-pragma").classList.add("a-btn-pragma--active");
+      })
+      this.el.sceneEl.addEventListener('markerLost', () => {
+        document.getElementById("btn-pragma").classList.remove("a-btn-pragma--active");
+      })
+    }
+  });
+
+  // AFRAME.registerComponent('markerhandlerTwo', {
+  //   init: function () {
+  //     this.el.sceneEl.addEventListener('markerFound', () => {
+  //       console.log("markerhandlerTwo"); 
+  //       console.dir(this);
+  //     })
+  //   }
+  // });
+
+  // appendButon = () => { 
+  //   let welcomeBox = document.createElement("a");
+  //   let welcomeBoxTxt = document.createTextNode("Pragma");
+  //   welcomeBox.className = "a-btn-pragma";
+  //   welcomeBox.id = "a-btn-pragma";
+  //   welcomeBox.href = "https://www.pragma.com.co/es";
+  //   welcomeBox.appendChild(welcomeBoxTxt);
+  //   document.getElementById("content").appendChild(welcomeBox);
+  // }
+
+  appendNewMarker = () => {
+    // console.log("append new");
+    // document.getElementById("a-btn-pragma").setAttribute("href","https://www.pragma.com.co/casos-de-exito")
+    document.getElementById("scene").innerHTML += "<a-marker id='markerShip' markerhandler url='./assets/pattern-nave-1.patt' type='pattern' preset='custom'><a-entity rotation='90 0 0' position='0 0 0' scale='0.5 0.5 0.5' gltf-model='./assets/lollipopA.glb'></a-entity></a-marker>";
+  }
+
+  goSomewhere =()=> {
+    window.open("https://www.w3schools.com");
+  }
+</script>
+
+<body style="margin : 0px; overflow: hidden;">
+  
+  <div id="content" class="content">
+    <button id="btn-pragma" class="a-btn-pragma" onclick="goSomewhere()"> Pragma </button>
+    <!-- <a id="a-btn-pragma" target="_blank" class="a-btn-pragma" href="https://www.pragma.com.co/es">Pragma</a> -->
+  </div>
+
+  <a-scene embedded gesture-detector id="scene" arjs>
+    
+    <a-marker id="markerLogo" class="marker-img" markerhandler url="./assets/pattern-Screenshot_8.patt" type="pattern" preset="custom">
+      <a-entity rotation="0 90 0" position="0 0 0" scale="0.5 0.5 0.5" gltf-model="./assets/lollipopB.glb"></a-entity>
+    </a-marker> 
+
+    <a-marker id="markerShip" class="marker-img" markerhandler url="./assets/pattern-nave-1.patt" type="pattern" preset="custom">
+      <a-entity rotation="90 0 0" position="0 0 0" scale="0.5 0.5 0.5" gltf-model="./assets/lollipopA.glb"></a-entity>
+    </a-marker>
+
+    <a-marker id="markerMarcos" class="marker-img" markerhandler url="./assets/pattern-marcos-1.patt" type="pattern" preset="custom">
+      <a-entity position="0 0 0" scale="0.5 0.5 0.5" gltf-model="./assets/character_jack.gltf"></a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <!-- <a-scene embedded gesture-detector id="scene2" arjs>  
+    <a-marker id="markerShip" markerhandler url="./assets/pattern-nave-1.patt" type="pattern" preset="custom">
+      <a-entity rotation="90 0 0" position="0 0 0" scale="0.5 0.5 0.5" gltf-model="./assets/lollipopA.glb"></a-entity>
+    </a-marker>
+    <a-marker markerhandler url="./assets/pattern-marcos-1.patt" type="pattern" preset="custom">
+      <a-entity position="0 0 0" scale="0.5 0.5 0.5" gltf-model="./assets/character_jack.gltf"></a-entity>
+    </a-marker>
+  </a-scene> -->
+</body>
+
+</html>
